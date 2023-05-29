@@ -48,13 +48,41 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
+    let newNode = new Node(val);
 
+    if (this.length < 1) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
   }
 
   /** pop(): return & remove last item. */
 
   pop() {
+    // find and remove tail
+    // set tail to previous node
+    // decrement length
 
+    if (this.length < 1) {
+      return undefined;
+    }
+    
+    const poppedVal = this.tail.val;
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.next === this.tail) {
+        this.tail = current;
+        current.next = null;
+        this.length--;
+      }
+      current = current.next;
+    }
+    return poppedVal;
   }
 
   /** shift(): return & remove first item. */
